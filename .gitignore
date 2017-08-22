@@ -1,1 +1,6 @@
 Library
+.vscode
+obj
+Temp
+PathFinder.sln
+Assembly-CSharp.csproj
