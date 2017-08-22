@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour {
-	private List<Node> path = new List<Node>();
+	private Stack<Node> path = new Stack<Node>();
 	public float speed;
 	public Vector3 moveTo;
 	public bool search;
@@ -25,24 +25,12 @@ public class PlayerController : MonoBehaviour {
 		}
 
 		if (path != null || path.Count > 0){
-			transform.LookAt(path[0].GetPosition());
-			transform.position = Vector3.MoveTowards(transform.position, path[0].GetPosition(), speed * Time.deltaTime);
+			transform.LookAt(path.Peek().GetPosition());
+			transform.position = Vector3.MoveTowards(transform.position, path.Peek().GetPosition(), speed * Time.deltaTime);
 
-			if (Vector3.Distance(path[0].GetPosition(), transform.position) < 0.10f){
-				path.Remove(path[0]);
+			if (Vector3.Distance(path.Peek().GetPosition(), transform.position) < 0.10f){
+				path.Pop();
 			}
 		}
 	}
-
-#if   UNITY_EDITOR    
-	void OnDrawGizmos(){
-		Gizmos.color = Color.green;
-		for (int i = 0; i < path.Count; i++){
-			Gizmos.DrawSphere(path[i].GetPosition(), 0.25f);
-			for (int j = 0; j < path[i].GetAdyacents().Count; j++){
-				Gizmos.DrawLine(path[i].GetPosition(), path[i].GetAdyacents()[j].GetPosition());
-			}
-		}
-	}
-#endif
 }

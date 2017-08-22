@@ -7,7 +7,9 @@ public class PathFinder : MonoBehaviour {
     private List<Node> nodes = new List<Node>();
     private List<Node> openNodes = new List<Node>();
     private List<Node> closedNodes = new List<Node>();
-    private List<Node> path = new List<Node>();
+    //private List<Node> path = new List<Node>();
+	private Stack<Node> path = new Stack<Node>();
+	private List<Node> pathToCheck = new List<Node>();
     private Node startNode;
     private Node endNode;
 
@@ -33,8 +35,9 @@ public class PathFinder : MonoBehaviour {
 		}
     }
 	
-    public List<Node> FindPhat(Vector3 beginPos, Vector3 endPos) {
+    public Stack<Node> FindPhat(Vector3 beginPos, Vector3 endPos) {
 		path.Clear();
+		pathToCheck.Clear();
 		openNodes.Clear();
 		closedNodes.Clear();
 		
@@ -57,13 +60,14 @@ public class PathFinder : MonoBehaviour {
 		return SearchPath(startNode);
     }
 	
-    private List<Node> SearchPath(Node node) {
+    private Stack<Node> SearchPath(Node node) {
 		openNodes.Add(node);
 		
 		while(openNodes.Count > 0){
 			if (node.GetPosition() == endNode.GetPosition()){
 				while (node.GetParent() != null){
-					path.Add(node);
+					path.Push(node);
+					pathToCheck.Add(node);
 					node = node.GetParent();
 				}
 				return path;
@@ -86,12 +90,18 @@ public class PathFinder : MonoBehaviour {
 
 #if   UNITY_EDITOR    
 	void OnDrawGizmos(){
-		Gizmos.color = Color.white;
 		for (int i = 0; i < nodes.Count; i++){
+			Gizmos.color = Color.white;
 			Gizmos.DrawSphere(nodes[i].GetPosition(), 0.25f);
 			for (int j = 0; j < nodes[i].GetAdyacents().Count; j++){
 				Gizmos.DrawLine(nodes[i].GetPosition(), nodes[i].GetAdyacents()[j].GetPosition());
 			}
+		}
+
+		for (int i = 0; i < pathToCheck.Count; i++){
+			Gizmos.color = Color.green;
+			Gizmos.DrawSphere(pathToCheck[i].GetPosition(), 0.25f);
+			Gizmos.DrawLine(nodes[i].GetPosition(), nodes[i].GetParent().GetPosition());
 		}
 	}
 #endif
