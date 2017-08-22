@@ -33,13 +33,54 @@ public class PathFinder : MonoBehaviour {
 		}
     }
 	
-    public void FindPhat(Vector3 beginPos, Vector3 endPos) {
+    public List<Node> FindPhat(Vector3 beginPos, Vector3 endPos) {
+		path.Clear();
+		openNodes.Clear();
+		closedNodes.Clear();
+		
+		if (nodes == null || nodes.Count == 0)
+			return null;
+		
+		startNode = nodes[0];
+		endNode = nodes[0];
 
+		for (int i = 0; i < nodes.Count; i++){
+			if (Vector3.Distance(startNode.GetPosition(), beginPos) > (Vector3.Distance(nodes[i].GetPosition(), beginPos))){
+				startNode = nodes[i];
+			}
+
+			if (Vector3.Distance(endNode.GetPosition(), endPos) > (Vector3.Distance(nodes[i].GetPosition(), endPos))){
+				endNode = nodes[i];
+			}
+		}
+		
+		return SearchPath(startNode);
     }
 	
-    private void OpenNode(Node node) {
+    private List<Node> SearchPath(Node node) {
+		openNodes.Add(node);
+		
+		while(openNodes.Count > 0){
+			if (node.GetPosition() == endNode.GetPosition()){
+				while (node.GetParent() != null){
+					path.Add(node);
+					node = node.GetParent();
+				}
+				return path;
+			}
 
+			for(int i = 0; i < node.GetAdyacents().Count; i++){
+				if (!closedNodes.Contains(node.GetAdyacents()[i]))
+					openNodes.Add(node.GetAdyacents()[i]);
+			}
+			openNodes.Remove(node);
+			closedNodes.Add(node);
+
+			node = openNodes[0];
+		}
+		return null;
     }
+
 #if   UNITY_EDITOR    
 	void OnDrawGizmos(){
 		Gizmos.color = Color.white;
