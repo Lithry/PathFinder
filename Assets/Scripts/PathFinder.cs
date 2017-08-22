@@ -14,8 +14,8 @@ public class PathFinder : MonoBehaviour {
     void Start () {
         instance = this;
 
-        for (int x = -10; x < 10; x++){
-			for (int z = -10; z < 10; z++){
+        for (int x = 0; x < 10; x++){
+			for (int z = 0; z < 10; z++){
 				Node nNode = new Node();
 				nNode.SetPosition(new Vector3(x, 0, z));
 				nodes.Add(nNode);
@@ -69,12 +69,15 @@ public class PathFinder : MonoBehaviour {
 				return path;
 			}
 
-			for(int i = 0; i < node.GetAdyacents().Count; i++){
-				if (!closedNodes.Contains(node.GetAdyacents()[i]))
-					openNodes.Add(node.GetAdyacents()[i]);
-			}
 			openNodes.Remove(node);
 			closedNodes.Add(node);
+			
+			for(int i = 0; i < node.GetAdyacents().Count; i++){
+				if (!closedNodes.Contains(node.GetAdyacents()[i]) && !openNodes.Contains(node.GetAdyacents()[i])){
+					openNodes.Add(node.GetAdyacents()[i]);
+					node.GetAdyacents()[i].SetParent(node);
+				}
+			}
 
 			node = openNodes[0];
 		}

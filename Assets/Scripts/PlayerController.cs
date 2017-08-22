@@ -3,15 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour {
-	private Transform tran;
 	private List<Node> path = new List<Node>();
 	public float speed;
 	public Vector3 moveTo;
 	public bool search;
 	void Start () {
-		tran = transform;
 		search = false;
-		speed = 10;
+		speed = 4;
 	}
 	
 	// Update is called once per frame
@@ -22,14 +20,15 @@ public class PlayerController : MonoBehaviour {
 	void Move(){
 		if (search){
 			search = false;
-			path = PathFinder.instance.FindPhat(tran.position, moveTo);
+			path.Clear();
+			path = PathFinder.instance.FindPhat(transform.position, moveTo);
 		}
 
 		if (path != null || path.Count > 0){
-			tran.LookAt(path[0].GetPosition());
-			tran.Translate(Vector3.forward * speed * Time.deltaTime);
+			transform.LookAt(path[0].GetPosition());
+			transform.position = Vector3.MoveTowards(transform.position, path[0].GetPosition(), speed * Time.deltaTime);
 
-			if (Vector3.Distance(path[0].GetPosition(), tran.position) < 0.10f){
+			if (Vector3.Distance(path[0].GetPosition(), transform.position) < 0.10f){
 				path.Remove(path[0]);
 			}
 		}

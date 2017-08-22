@@ -20,7 +20,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4109704373678558}
   - component: {fileID: 33417769177078006}
-  - component: {fileID: 65540317884752722}
   - component: {fileID: 23516915472372964}
   m_Layer: 0
   m_Name: Cube (1)
@@ -38,7 +37,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4493500224813584}
   - component: {fileID: 33668437781551932}
-  - component: {fileID: 135566598679421172}
   - component: {fileID: 23991863163926128}
   m_Layer: 0
   m_Name: Nose
@@ -56,7 +54,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4225113639341408}
   - component: {fileID: 33808101429979126}
-  - component: {fileID: 65834332611816124}
   - component: {fileID: 23356646959162532}
   m_Layer: 0
   m_Name: Cube
@@ -74,7 +71,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4687813586582692}
   - component: {fileID: 33253166178170412}
-  - component: {fileID: 65436563347774604}
   - component: {fileID: 23446585880352950}
   m_Layer: 0
   m_Name: Sunglasses
@@ -111,7 +107,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4095836799681900}
   - component: {fileID: 33271984126640746}
-  - component: {fileID: 135397098607042994}
   - component: {fileID: 23321709921242778}
   m_Layer: 0
   m_Name: Sphere (1)
@@ -437,42 +432,6 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1645254116020986}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!65 &65436563347774604
-BoxCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1649658614934408}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!65 &65540317884752722
-BoxCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1300074109251358}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!65 &65834332611816124
-BoxCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1645254116020986}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &114307657667524094
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -487,36 +446,12 @@ MonoBehaviour:
   speed: 0
   moveTo: {x: 0, y: 0, z: 0}
   search: 0
---- !u!135 &135397098607042994
-SphereCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1934994782565978}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!135 &135407667286943558
 SphereCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1856324741790518}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!135 &135566598679421172
-SphereCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1315504125779382}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
