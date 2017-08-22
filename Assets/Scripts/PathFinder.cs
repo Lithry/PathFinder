@@ -40,9 +40,14 @@ public class PathFinder : MonoBehaviour {
 		pathToCheck.Clear();
 		openNodes.Clear();
 		closedNodes.Clear();
-		
-		if (nodes == null || nodes.Count == 0)
+
+		if (nodes == null || nodes.Count == 0){
 			return null;
+		}
+
+		for(int i = 0; i < nodes.Count; i++){
+			nodes[i].SetParent(null);
+		}
 		
 		startNode = nodes[0];
 		endNode = nodes[0];
@@ -90,18 +95,12 @@ public class PathFinder : MonoBehaviour {
 
 #if   UNITY_EDITOR    
 	void OnDrawGizmos(){
+		Gizmos.color = Color.white;
 		for (int i = 0; i < nodes.Count; i++){
-			Gizmos.color = Color.white;
 			Gizmos.DrawSphere(nodes[i].GetPosition(), 0.25f);
 			for (int j = 0; j < nodes[i].GetAdyacents().Count; j++){
 				Gizmos.DrawLine(nodes[i].GetPosition(), nodes[i].GetAdyacents()[j].GetPosition());
 			}
-		}
-
-		for (int i = 0; i < pathToCheck.Count; i++){
-			Gizmos.color = Color.green;
-			Gizmos.DrawSphere(pathToCheck[i].GetPosition(), 0.25f);
-			Gizmos.DrawLine(nodes[i].GetPosition(), nodes[i].GetParent().GetPosition());
 		}
 	}
 #endif
