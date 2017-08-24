@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PathFinder : MonoBehaviour {
 	static public PathFinder instance;
-	[Range(0, 10)]
+	[Range(1, 10)]
 	public int size;
     private List<Node> nodes = new List<Node>();
     private List<Node> openNodes = new List<Node>();
@@ -140,6 +140,16 @@ public class PathFinder : MonoBehaviour {
 			for (int j = 0; j < nodes[i].GetAdyacents().Count; j++){
 				Gizmos.DrawLine(nodes[i].GetPosition(), nodes[i].GetAdyacents()[j].GetPosition());
 			}
+		}
+
+		for (int i = 0; i < closedNodes.Count; i++){
+			Gizmos.color = Color.magenta;
+			Gizmos.DrawSphere(closedNodes[i].GetPosition(), 0.30f);
+		}
+
+		for (int i = 0; i < pathToCheck.Count; i++){
+			Gizmos.color = Color.green;
+			Gizmos.DrawSphere(pathToCheck[i].GetPosition(), 0.30f);
 		}
 	}
 #endif
