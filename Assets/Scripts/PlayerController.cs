@@ -24,7 +24,7 @@ public class PlayerController : MonoBehaviour {
 			path = PathFinder.instance.FindPhat(transform.position, moveTo);
 		}
 
-		if (path != null || path.Count > 0){
+		if (path != null && path.Count > 0){
 			transform.LookAt(path.Peek().GetPosition());
 			transform.position = Vector3.MoveTowards(transform.position, path.Peek().GetPosition(), speed * Time.deltaTime);
 

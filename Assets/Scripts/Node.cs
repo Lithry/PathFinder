@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Node{
-    Node parent;
+    private Node parent;
     private List<Node> adyacents = new List<Node>();
     private Vector3 pos;
+    private int value;
+    private int totalValue;
 
     public void AddAdyacent(Node ady) {
         adyacents.Add(ady);
@@ -19,6 +21,11 @@ public class Node{
         parent = pNode;
     }
 
+    public void SetParentAndParentTotalValue(Node pNode) {
+        parent = pNode;
+        totalValue += pNode.GetTotalValue();
+    }
+
     public Node GetParent(){
         return parent;
     }
@@ -29,6 +36,26 @@ public class Node{
 
     public Vector3 GetPosition(){
         return pos;
+    }
+
+    public void SetValue(int val){
+        value = val;
+    }
+
+    public int GetValue(){
+        return value;
+    }
+
+    public void AddTotalValue(int val){
+        totalValue += val;
+    }
+
+    public void ResetTotalValue(){
+        totalValue = value;
+    }
+
+    public int GetTotalValue(){
+        return totalValue;
     }
 
 }
