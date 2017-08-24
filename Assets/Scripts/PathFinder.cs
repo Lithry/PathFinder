@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PathFinder : MonoBehaviour {
 	static public PathFinder instance;
+	[Range(0, 10)]
+	public int size;
     private List<Node> nodes = new List<Node>();
     private List<Node> openNodes = new List<Node>();
     private List<Node> closedNodes = new List<Node>();
@@ -16,16 +18,25 @@ public class PathFinder : MonoBehaviour {
     void Start () {
         instance = this;
 
-        for (int x = 0; x < 10; x++){
-			for (int z = 0; z < 10; z++){
+        for (int x = -size + 1; x < size; x++){
+			
+			for (int z = -size + 1; z < size; z++){
+				
 				Node nNode = new Node();
+				Node nNode2 = new Node();
 				nNode.SetPosition(new Vector3(x, 0, z));
-                if (x == 5 && ( z < 5 || z > 5))
+				nNode2.SetPosition(new Vector3(x + 0.5f, 0, z + 0.5f));
+               
+			    if ((x == 5 && ( z < 5 || z > 5)) || (x == -4 && ( z < -6 || z > -6))){
 					nNode.SetValue(0);
-                else
+					nNode.SetValue(0);
+				}
+                else{
 					nNode.SetValue(Random.Range(1, 3));
-
-                nodes.Add(nNode);
+					nNode2.SetValue(Random.Range(1, 3));
+				}
+			    nodes.Add(nNode2);
+				nodes.Add(nNode);
 			}
 		}
 
@@ -88,9 +99,8 @@ public class PathFinder : MonoBehaviour {
 				if (!closedNodes.Contains(node.GetAdyacents()[i]) && !openNodes.Contains(node.GetAdyacents()[i]) && node.GetAdyacents()[i].GetValue() != 0){
 					openNodes.Add(node.GetAdyacents()[i]);
 					node.GetAdyacents()[i].SetParentAndParentTotalValue(node);
-					node.GetAdyacents()[i].AddTotalValue(
-						Mathf.Abs((int)node.GetAdyacents()[i].GetPosition().x - (int)endNode.GetPosition().x) +
-						Mathf.Abs((int)node.GetAdyacents()[i].GetPosition().z - (int)endNode.GetPosition().z));
+					node.GetAdyacents()[i].AddTotalValue(Vector3.Distance(node.GetAdyacents()[i].GetPosition(), endNode.GetPosition()));
+						
 					
 				}
 			}
@@ -125,7 +135,7 @@ public class PathFinder : MonoBehaviour {
 				Gizmos.color = Color.white;
 			else
 				Gizmos.color = Color.grey;
-			Gizmos.DrawSphere(nodes[i].GetPosition(), 0.25f);
+			Gizmos.DrawSphere(nodes[i].GetPosition(), 0.15f);
 			Gizmos.color = Color.white;
 			for (int j = 0; j < nodes[i].GetAdyacents().Count; j++){
 				Gizmos.DrawLine(nodes[i].GetPosition(), nodes[i].GetAdyacents()[j].GetPosition());

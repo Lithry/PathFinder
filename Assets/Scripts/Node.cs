@@ -7,7 +7,7 @@ public class Node{
     private List<Node> adyacents = new List<Node>();
     private Vector3 pos;
     private int value;
-    private int totalValue;
+    private float totalValue;
 
     public void AddAdyacent(Node ady) {
         adyacents.Add(ady);
@@ -46,15 +46,15 @@ public class Node{
         return value;
     }
 
-    public void AddTotalValue(int val){
+    public void AddTotalValue(float val){
         totalValue += val;
     }
 
     public void ResetTotalValue(){
-        totalValue = value;
+        totalValue = (float)value;
     }
 
-    public int GetTotalValue(){
+    public float GetTotalValue(){
         return totalValue;
     }
 
