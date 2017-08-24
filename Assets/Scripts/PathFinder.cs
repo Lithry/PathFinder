@@ -20,15 +20,10 @@ public class PathFinder : MonoBehaviour {
 			for (int z = 0; z < 10; z++){
 				Node nNode = new Node();
 				nNode.SetPosition(new Vector3(x, 0, z));
-                switch (x)
-                {
-                    case 5 when z < 5 || z > 5:
-                        nNode.SetValue(0);
-                        break;
-                    default:
-                        nNode.SetValue(Random.Range(1, 3));
-                        break;
-                }
+                if (x == 5 && ( z < 5 || z > 5))
+					nNode.SetValue(0);
+                else
+					nNode.SetValue(Random.Range(1, 3));
 
                 nodes.Add(nNode);
 			}
@@ -93,6 +88,10 @@ public class PathFinder : MonoBehaviour {
 				if (!closedNodes.Contains(node.GetAdyacents()[i]) && !openNodes.Contains(node.GetAdyacents()[i]) && node.GetAdyacents()[i].GetValue() != 0){
 					openNodes.Add(node.GetAdyacents()[i]);
 					node.GetAdyacents()[i].SetParentAndParentTotalValue(node);
+					node.GetAdyacents()[i].AddTotalValue(
+						Mathf.Abs((int)node.GetAdyacents()[i].GetPosition().x - (int)endNode.GetPosition().x) +
+						Mathf.Abs((int)node.GetAdyacents()[i].GetPosition().z - (int)endNode.GetPosition().z));
+					
 				}
 			}
 
