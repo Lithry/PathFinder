@@ -7,14 +7,33 @@ public class PlayerController : MonoBehaviour {
 	public float speed;
 	public Vector3 moveTo;
 	public bool search;
+	public GameObject cuartel;
+	public GameObject mina;
+	private FSM stateMachin;
+
+	private enum States{
+		Idle = 0,
+		GoToDig,
+		Dig,
+		GoToDeposite,
+		Deposite,
+		TotalStates
+	}
+
+
+
+	
 	void Start () {
 		search = false;
 		speed = 4;
+		stateMachin = new FSM();
+		stateMachin.Init((int)States.TotalStates, 0);
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		Move();
+		stateMachin.PlayState();
 	}
 
 	void Move(){
