@@ -4,11 +4,9 @@ using UnityEngine;
 
 public class Dig : State {
 
-	public Dig(){}
+	public Dig(Transform obj, FSM fsm) : base(obj, fsm) {}
 	// Use this for initialization
-	override protected void Action(){
 
-	}
 	override public void Play(){
 		
 	}

@@ -3,12 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Deposite : State {
-	public Deposite(){
+	public Deposite(Transform obj, FSM fsm) : base(obj, fsm) {}
 
-	}
-	override protected void Action(){
-
-	}
 	override public void Play(){
 		
 	}

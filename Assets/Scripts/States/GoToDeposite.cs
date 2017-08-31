@@ -3,13 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class GoToDeposite : State {
-
-	public GoToDeposite(){}
+	private Vector3 target;
+	
+	public GoToDeposite(Transform obj, FSM fsm) : base(obj, fsm) {}
 	// Use this for initialization
-	override protected void Action(){
 
-	}
 	override public void Play(){
 		
+	}
+
+	public void SetTarget(Vector3 posTarget){
+		target = posTarget;
+		target.y = 0;
 	}
 }
