@@ -6,7 +6,7 @@ public class FSM : MonoBehaviour {
 	int[,] stateMatrice;
 	private State[] states;
 	private State state;
-	int currentState = 0;
+	private int currentState = 0;
 
 	public void Init(int statesCount, int eventNum, State[] statesList){
 		stateMatrice = new int[statesCount,eventNum];
@@ -16,8 +16,8 @@ public class FSM : MonoBehaviour {
 			}
 		}
 		states = statesList;
-		state = states[0];
 		currentState = 0;
+		state = states[currentState];
 	}
 
 	public void SetRelation(int homeState, int eventGoing, int destinationState){
@@ -26,8 +26,7 @@ public class FSM : MonoBehaviour {
 
 	public void ReceiveEvent(int eventGoing){
 		int newState = stateMatrice[currentState, eventGoing];
-		if (newState != -1)
-		{
+		if (newState != -1) {
 			currentState = newState;
 			state = states[currentState];
 		}

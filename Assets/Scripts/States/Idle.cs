@@ -3,10 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Idle : State {
-	private Transform target;
 	
 	public Idle(Transform obj, FSM fsm) : base(obj, fsm) {
-		target.position = transform.position;
 	}
 
 	override public void Play(){

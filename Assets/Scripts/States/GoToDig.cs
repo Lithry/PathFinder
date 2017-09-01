@@ -3,14 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class GoToDig : State {
+	private PlayerController player;
 	private Vector3 target;
 	private Stack<Node> path = new Stack<Node>();
 	private float speed;
 	private bool going = false; 
-	public GoToDig(Transform obj, FSM fsm) : base(obj, fsm) {}
+	public GoToDig(PlayerController player, Transform obj, FSM fsm) : base(obj, fsm) {
+		this.player = player;
+	}
 
 	override public void Play(){
-		if (!going){
+		if (!going && Vector3.Distance(transform.position, target) > 1){
 			path = PathFinder.instance.FindPhat(transform.position, target);
 		}
 
@@ -23,7 +26,11 @@ public class GoToDig : State {
 			if (Vector3.Distance(path.Peek().GetPosition(), transform.position) < 0.10f){
 				path.Pop();
 				if (path.Count < 1){
-					fsm.ReceiveEvent((int)PlayerController.Events.Arrived);
+					going = false;
+					if (Vector3.Distance(transform.position, target) < 0.10f)
+						fsm.ReceiveEvent((int)PlayerController.Events.Arrived);
+					else
+						fsm.ReceiveEvent((int)PlayerController.Events.Unknown);
 				}
 			}
 		}
