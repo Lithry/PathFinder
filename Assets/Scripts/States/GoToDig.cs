@@ -3,16 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class GoToDig : State {
-	private PlayerController player;
 	private Vector3 target;
+	private Mine mine;
 	private Stack<Node> path = new Stack<Node>();
 	private float speed;
 	private bool going = false; 
-	public GoToDig(PlayerController player, Transform obj, FSM fsm) : base(obj, fsm) {
-		this.player = player;
-	}
+	public GoToDig(Transform obj, FSM fsm) : base(obj, fsm) {}
 
 	override public void Play(){
+		if (mine.GetResoursesNum() < 1){
+			fsm.ReceiveEvent((int)PlayerController.Events.MineEmpty);
+		}
+		
 		if (!going && Vector3.Distance(transform.position, target) > 1){
 			path = PathFinder.instance.FindPhat(transform.position, target);
 		}
@@ -36,9 +38,10 @@ public class GoToDig : State {
 		}
 	}
 
-	public void SetTarget(Vector3 posTarget){
-		target = posTarget;
-		target.y = 0;
+	public void SetTarget(Mine target){
+		mine = target;
+		this.target = target.transform.position;
+		this.target.y = 0;
 	}
 
 	public void SetSpeed(float speed){

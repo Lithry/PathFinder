@@ -3,9 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Idle : State {
-	
-	public Idle(Transform obj, FSM fsm) : base(obj, fsm) {
-	}
+	private GoToDig goToDig;
+	public Idle(Transform obj, FSM fsm) : base(obj, fsm) {}
 
 	override public void Play(){
 	transform.Rotate(Vector3.up * 100 * Time.deltaTime, Space.World);

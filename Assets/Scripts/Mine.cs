@@ -9,7 +9,10 @@ public class Mine : MonoBehaviour {
 		resourses = 16;
 	}
 	
-	// Update is called once per frame
+	void Update(){
+		Debug.Log("Mine: " + resourses.ToString());
+	}
+
 	public void ResourcesDecrease(int num){
 		if (resourses >= num){
 			resourses -= num;

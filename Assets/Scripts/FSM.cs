@@ -32,10 +32,6 @@ public class FSM : MonoBehaviour {
 		}
 	}
 
-	public void GetState(){
-
-	}
-
 	public void PlayState(){
 		state.Play();
 	}

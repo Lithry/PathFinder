@@ -42,6 +42,9 @@ public class Dig : State {
 					player.AddResoursesToBag(1);
 					fsm.ReceiveEvent((int)PlayerController.Events.MineEmpty);
 					break;
+				case 0:
+					fsm.ReceiveEvent((int)PlayerController.Events.MineEmpty);
+					break;
 				default:
 					mine.ResourcesDecrease(5);
 					player.AddResoursesToBag(5);
