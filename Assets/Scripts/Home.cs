@@ -9,9 +9,7 @@ public class Home : MonoBehaviour {
 		warehouse = 0;
 	}
 	
-	void Update(){
-		Debug.Log("Warehouse: " + warehouse.ToString());
-	}
+	void Update(){}
 
 	public void DepositeOnWarehouse(int num){
 		warehouse += num;

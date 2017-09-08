@@ -32,47 +32,28 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	private State[] states;
+	private Stack<Node> path = new Stack<Node>();
+
 
 	void Awake () {
-		search = false;
-		//speed = 4;
-		stateMachin = new FSM();
+
+	}
+
+	void Update () {
 		
-		Transform trans = transform;
-		states = new State[] {
-		new Idle(trans, stateMachin),
-		new GoToDig(trans, stateMachin),
-		new Dig(this, trans, stateMachin),
-		new GoToDeposite(trans, stateMachin),
-		new Deposite(this, trans, stateMachin)
-		};
-
-		((GoToDig)states[(int)States.GoToDig]).SetTarget(mina.GetComponent<Mine>());
-		((GoToDig)states[(int)States.GoToDig]).SetSpeed(speed);
-		((Dig)states[(int)States.Dig]).SetMine(mina.GetComponent<Mine>());
-		((GoToDeposite)states[(int)States.GoToDeposite]).SetTarget(cuartel.transform.position);
-		((GoToDeposite)states[(int)States.GoToDeposite]).SetSpeed(speed);
-		((Deposite)states[(int)States.Deposite]).SetWarehouse(cuartel.GetComponent<Home>());
-
-		stateMachin.Init((int)States.TotalStatesCount, (int)Events.TotalEventsCount, states);
-		stateMachin.SetRelation((int)States.Idle, (int)Events.GoMine, (int)States.GoToDig);
-		stateMachin.SetRelation((int)States.GoToDig, (int)Events.Arrived, (int)States.Dig);
-		stateMachin.SetRelation((int)States.GoToDig, (int)Events.MineEmpty, (int)States.Idle);
-		stateMachin.SetRelation((int)States.GoToDig, (int)Events.Unknown, (int)States.Idle);
-		stateMachin.SetRelation((int)States.Dig, (int)Events.MineEmpty, (int)States.GoToDeposite);
-		stateMachin.SetRelation((int)States.Dig, (int)Events.Full, (int)States.GoToDeposite);
-		stateMachin.SetRelation((int)States.Dig, (int)Events.Unknown, (int)States.Idle);
-		stateMachin.SetRelation((int)States.GoToDeposite, (int)Events.Arrived, (int)States.Deposite);
-		stateMachin.SetRelation((int)States.GoToDeposite, (int)Events.Unknown, (int)States.Idle);
-		stateMachin.SetRelation((int)States.Deposite, (int)Events.MineEmpty, (int)States.Idle);
-		stateMachin.SetRelation((int)States.Deposite, (int)Events.Empty, (int)States.GoToDig);
-		stateMachin.SetRelation((int)States.Deposite, (int)Events.Unknown, (int)States.Idle);
+	}
+	void Move(){
+		/*if ( Input.GetMouseButtonDown (0)){ 
+   		RaycastHit hit; 
+   		Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition); 
+   			if ( Physics.Raycast (ray,out hit)) {
+				if (!going && Vector3.Distance(transform.position, target) > 1){
+						path = PathFinder.instance.FindPhat(transform.position, target);
+				}
+			}
+		}*/
 	}
 	
-	void Update () {
-		stateMachin.PlayState();
-		Debug.Log("Bag: " + bag.ToString());
-	}
 
 	public void AddResoursesToBag(int num){
 		bag += num;
@@ -99,20 +80,4 @@ public class PlayerController : MonoBehaviour {
 	public int getBagNum(){
 		return bag;
 	}
-
-	public string GetCollition(){
-		if (onTrigger)
-			return triggerWith;
-		else
-			return null;
-	}
-
-	void OnTriggerStay(Collider other) {
-        onTrigger = true;
-		triggerWith = other.transform.tag;
-    }
-	
-	void OnTriggerExit(Collider other) {
-        onTrigger = false;
-    }
 }

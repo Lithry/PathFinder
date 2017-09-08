@@ -9,9 +9,7 @@ public class Mine : MonoBehaviour {
 		resourses = 16;
 	}
 	
-	void Update(){
-		Debug.Log("Mine: " + resourses.ToString());
-	}
+	void Update(){}
 
 	public void ResourcesDecrease(int num){
 		if (resourses >= num){
