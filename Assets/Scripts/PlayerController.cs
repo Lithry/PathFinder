@@ -6,11 +6,10 @@ public class PlayerController : MonoBehaviour {
 	public float speed;
 	private int bag = 0;
 	public bool search;
-	public GameObject cuartel;
-	public GameObject mina;
-	private FSM stateMachin;
-	private bool onTrigger;
-	private string triggerWith;
+
+	private PlayerAIBuilder AIBuilder = new PlayerAIBuilder();
+	private Blackboard blackboard = new Blackboard();
+	private BTNode<Blackboard> AI;
 
 	public enum States{
 		Idle = 0,
@@ -36,22 +35,24 @@ public class PlayerController : MonoBehaviour {
 
 
 	void Awake () {
-
+		blackboard.SetPlayer(this);
+		AI = AIBuilder.BuildAI(blackboard);
 	}
 
 	void Update () {
-		
+		Move();
+		AI.Play();
 	}
+
 	void Move(){
-		/*if ( Input.GetMouseButtonDown (0)){ 
+		if ( Input.GetMouseButtonDown (0)){ 
    		RaycastHit hit; 
    		Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition); 
    			if ( Physics.Raycast (ray,out hit)) {
-				if (!going && Vector3.Distance(transform.position, target) > 1){
-						path = PathFinder.instance.FindPhat(transform.position, target);
-				}
+				blackboard.SetTargetPosition(new Vector3(hit.transform.position.x, 0, hit.transform.position.z));
+				blackboard.SetTarget(hit.transform.gameObject);
 			}
-		}*/
+		}
 	}
 	
 

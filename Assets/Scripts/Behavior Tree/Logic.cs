@@ -1,21 +1,22 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 
-public abstract class Logic : NodeWithChildrens {
+public abstract class Logic<T> : NodeWithChildrens<T> {
 
-	public Logic() : base() {}
+	public Logic(T blackboard) : base(blackboard) {}
+
+	override protected void Awake(){}
 	
-	protected abstract bool ExecuteLogic();
+	abstract protected bool ExecuteLogic();
 	
-	override public Status Execute(){
+	override protected State Execute(){
 		if (ExecuteLogic())
-			return Status.True;
+			return State.True;
 		
-		return Status.False;
+		return State.False;
 	}
 
-	override protected bool CanHaveChildren() {
+	override protected bool CanHaveChildren(BTNode<T> child) {
 		if (childs.Count >= 2)
 			return false;
 

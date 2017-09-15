@@ -1,12 +1,27 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 
-public class Selector : NodeWithChildrens {
+public class Selector<T> : NodeWithChildrens<T> {
+	private int childIndex;
+	public Selector(T blackboard) : base(blackboard) {}
 
-	public Selector() : base() {}
+	override protected void Awake(){}
 
-	override public Status Execute() {
-		return Status.True;
+	override protected State Execute() {
+			while(childIndex < childs.Count){
+			status = childs[childIndex].Play();
+
+			switch(status){
+				case State.Executing:
+				return status;
+				case State.False:
+				childIndex++;
+				return status;
+				case State.True:
+				childIndex = 0;
+				break;
+			}
+		}
+		return status;
 	}
 }

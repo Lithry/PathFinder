@@ -1,17 +1,18 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 
-public abstract class Conditional : BTNode {
+public abstract class Conditional<T> : BTNode<T> {
 
-	public Conditional() : base() {}
+	public Conditional(T blackboard) : base(blackboard) {}
+
+	
 
 	protected abstract bool ExecuteCondition();
 
-	override public Status Execute(){
+	override protected State Execute(){
 		if (ExecuteCondition())
-			return Status.True;
+			return State.True;
 		
-		return Status.False;
+		return State.False;
 	}
 }

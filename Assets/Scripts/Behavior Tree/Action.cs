@@ -1,13 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 
-public abstract class Action : BTNode {
+public abstract class Action<T> : BTNode<T> {
 
-	public Action() : base() {}
+	public Action (T blackboard) : base(blackboard) {}
 
-	protected abstract Status ExecuteAction();
-	override public Status Execute(){
+	protected abstract State ExecuteAction();
+	
+	override protected State Execute(){
 		return ExecuteAction();
 	}
 }

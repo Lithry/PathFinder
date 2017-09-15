@@ -1,12 +1,27 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 
-public class Sequence : NodeWithChildrens {
+public class Sequence<T> : NodeWithChildrens<T> {
+	private int childIndex;
+	public Sequence(T blackboard) : base(blackboard) {}
 
-	public Sequence() : base() {}
+	override protected void Awake(){}
 
-	override public Status Execute() {
-		return Status.True;
+	override protected State Execute() {
+		while(childIndex < childs.Count){
+			status = childs[childIndex].Play();
+
+			switch(status){
+				case State.Executing:
+				return status;
+				case State.False:
+				childIndex = 0;
+				return status;
+				case State.True:
+				childIndex++;
+				break;
+			}
+		}
+		return status;
 	}
 }

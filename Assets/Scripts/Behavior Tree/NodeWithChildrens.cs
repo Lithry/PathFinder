@@ -1,24 +1,28 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 
-public class NodeWithChildrens : BTNode {
-	protected List<BTNode> childs = new List<BTNode>();
-	public NodeWithChildrens() : base() {}
+public class NodeWithChildrens<T> : BTNode<T> {
+	protected List<BTNode<T>> childs = new List<BTNode<T>>();
+	public NodeWithChildrens(T blackboard) : base(blackboard) {}
 	
-	override public Status Execute() {
-		return Status.True;
+	override protected void Awake(){}
+
+	override protected State Execute() {
+		return State.True;
 	}
 
-	public bool AddChildren(BTNode child) {
-		if (CanHaveChildren()) {
+    override protected void Reset(){}
+	
+	public bool AddChildren(BTNode<T> child) {
+		if (CanHaveChildren(child)) {
 			childs.Add(child);	
 			return true;
 		}		
 		return false;
 	}
 
-	virtual protected bool CanHaveChildren() {
+	virtual protected bool CanHaveChildren(BTNode<T> child) {
 		return true;
 	}
+
 }
