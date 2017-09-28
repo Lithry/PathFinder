@@ -22,24 +22,19 @@ public class GoTo : Action<Blackboard> {
         if (lastTargetPosition != blackboard.GetTargetPosition())
             return State.False;
 
-        if (path != null && path.Count != 0)
-        {
-            blackboard.GetPlayer().gameObject.transform.LookAt(path.Peek().GetPosition());
+        if (path != null && path.Count != 0) {
+            blackboard.GetPlayer().transform.LookAt(path.Peek().GetPosition());
             blackboard.GetPlayer().transform.position = Vector3.MoveTowards(blackboard.GetPlayer().transform.position, path.Peek().GetPosition(), blackboard.GetSpeed() * Time.deltaTime);
 
-            if (Vector3.Distance(path.Peek().GetPosition(), blackboard.GetPlayer().transform.position) < 0.10f)
-            {
-                path.Pop();
-                if (path.Count < 1)
-                {
-                    if (Vector3.Distance(blackboard.GetPlayer().transform.position, blackboard.GetTargetPosition()) < 0.10f)
-                    {
-                        blackboard.ResetTargetPosition();
-                        blackboard.ResetTarget();
-                        Debug.Log("Goin To - True");
-                        return State.True;
-                    }
+            if (Vector3.Distance(path.Peek().GetPosition(), blackboard.GetPlayer().transform.position) < 0.10f) {
+                if (path.Count <= 1 && Vector3.Distance(path.Peek().GetPosition(), blackboard.GetPlayer().transform.position) < 0.10f) {
+                    blackboard.ResetTargetPosition();
+                    blackboard.ResetTarget();
+                    Debug.Log("Goin To - True");
+                    return State.True;
                 }
+                else
+                    path.Pop();
             }
 
         }
