@@ -22,6 +22,10 @@ public class Selector<T> : NodeWithChildrens<T> {
 				break;
 			}
 		}
-		return status;
+
+        if (childIndex >= childs.Count)
+            childIndex = 0;
+
+        return status;
 	}
 }

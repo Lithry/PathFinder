@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerAIBuilder {
 	public BTNode<Blackboard> BuildAI(Blackboard blackboard){
-		Sequence<Blackboard> root = new Sequence<Blackboard>(blackboard);
+		Selector<Blackboard> root = new Selector<Blackboard>(blackboard);
 		
 		Sequence<Blackboard> mine = new Sequence<Blackboard>(blackboard);
 		root.AddChildren(mine);
@@ -19,6 +19,11 @@ public class PlayerAIBuilder {
 
 		Action<Blackboard> goTo = new GoTo(blackboard);
 		mine.AddChildren(goTo);
+
+        Sequence<Blackboard> move = new Sequence<Blackboard>(blackboard);
+        move.AddChildren(goTo);
+
+        root.AddChildren(move);
 
 		return root;
 	}

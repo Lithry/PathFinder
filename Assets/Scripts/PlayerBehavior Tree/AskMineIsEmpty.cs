@@ -12,10 +12,14 @@ public class AskMineIsEmpty : Conditional<Blackboard> {
     }
 
     protected override bool ExecuteCondition() {
-        if(blackboard.GetTarget().GetComponent<Mine>().GetResoursesNum() <= 0)
-			return true;
-		
-		return false;
+        
+        if (blackboard.GetTarget().GetComponent<Mine>().GetResoursesNum() <= 0) {
+            Debug.Log("Asking if is Empty - True");
+            return true;
+        }
+
+        Debug.Log("Asking if is Empty - False");
+        return false;
     }
 
     protected override void Reset() {

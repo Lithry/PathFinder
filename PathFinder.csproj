@@ -82,14 +82,32 @@
     <Reference Include="UnityEditor.iOS.Extensions.Xcode">
       <HintPath>Library\UnityAssemblies\UnityEditor.iOS.Extensions.Xcode.dll</HintPath>
     </Reference>
+    <Reference Include="UnityEditor.iOS.Extensions.Xcode">
+      <HintPath>Library\UnityAssemblies\UnityEditor.iOS.Extensions.Xcode.dll</HintPath>
+    </Reference>
     <Reference Include="UnityEditor.iOS.Extensions.Common">
       <HintPath>Library\UnityAssemblies\UnityEditor.iOS.Extensions.Common.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\Behavior Tree\Action.cs" />
+    <Compile Include="Assets\Scripts\Behavior Tree\BTNode.cs" />
+    <Compile Include="Assets\Scripts\Behavior Tree\Conditional.cs" />
+    <Compile Include="Assets\Scripts\Behavior Tree\Decorator.cs" />
+    <Compile Include="Assets\Scripts\Behavior Tree\Logic.cs" />
+    <Compile Include="Assets\Scripts\Behavior Tree\NodeWithChildrens.cs" />
+    <Compile Include="Assets\Scripts\Behavior Tree\Selector.cs" />
+    <Compile Include="Assets\Scripts\Behavior Tree\Sequence.cs" />
     <Compile Include="Assets\Scripts\FSM.cs" />
+    <Compile Include="Assets\Scripts\Home.cs" />
+    <Compile Include="Assets\Scripts\Mine.cs" />
     <Compile Include="Assets\Scripts\Node.cs" />
     <Compile Include="Assets\Scripts\PathFinder.cs" />
+    <Compile Include="Assets\Scripts\PlayerBehavior Tree\AskIsAMine.cs" />
+    <Compile Include="Assets\Scripts\PlayerBehavior Tree\AskMineIsEmpty.cs" />
+    <Compile Include="Assets\Scripts\PlayerBehavior Tree\Blackboard.cs" />
+    <Compile Include="Assets\Scripts\PlayerBehavior Tree\GoTo.cs" />
+    <Compile Include="Assets\Scripts\PlayerBehavior Tree\PlayerAIBuilder.cs" />
     <Compile Include="Assets\Scripts\PlayerController.cs" />
     <Compile Include="Assets\Scripts\States\Deposite.cs" />
     <Compile Include="Assets\Scripts\States\Dig.cs" />

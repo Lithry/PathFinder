@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 
 public class Sequence<T> : NodeWithChildrens<T> {
-	private int childIndex;
+	private int childIndex = 0;
 	public Sequence(T blackboard) : base(blackboard) {}
 
 	override protected void Awake(){}
@@ -22,6 +22,10 @@ public class Sequence<T> : NodeWithChildrens<T> {
 				break;
 			}
 		}
-		return status;
+
+        if (childIndex >= childs.Count)
+            childIndex = 0;
+
+        return status;
 	}
 }

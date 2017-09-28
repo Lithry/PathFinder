@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 
 public class Decorator<T> : NodeWithChildrens<T> {
-	private bool check;
 	public Decorator(T blackboard) : base(blackboard) {}
 	
 	override protected State Execute(){

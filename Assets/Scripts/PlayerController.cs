@@ -36,6 +36,7 @@ public class PlayerController : MonoBehaviour {
 
 	void Awake () {
 		blackboard.SetPlayer(this);
+        blackboard.SetSpeed(speed);
 		AI = AIBuilder.BuildAI(blackboard);
 	}
 
@@ -49,7 +50,7 @@ public class PlayerController : MonoBehaviour {
    		RaycastHit hit; 
    		Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition); 
    			if ( Physics.Raycast (ray,out hit)) {
-				blackboard.SetTargetPosition(new Vector3(hit.transform.position.x, 0, hit.transform.position.z));
+				blackboard.SetTargetPosition(new Vector3(hit.point.x, 0, hit.point.z));
 				blackboard.SetTarget(hit.transform.gameObject);
 			}
 		}

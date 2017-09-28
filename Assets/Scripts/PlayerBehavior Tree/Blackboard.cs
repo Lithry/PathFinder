@@ -16,12 +16,20 @@ public class Blackboard {
         targetPosition = value;
     }
 
+    public void ResetTargetPosition(){
+        targetPosition = Vector3.zero;
+    }
+
     public GameObject GetTarget(){
          return target; 
     }
 
     public void SetTarget(GameObject value){
         target = value;
+    }
+
+    public void ResetTarget(){
+        target = null;
     }
 
     public PlayerController GetPlayer(){

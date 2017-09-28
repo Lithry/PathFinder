@@ -5,21 +5,21 @@ using UnityEngine;
 public class AskIsAMine : Conditional<Blackboard>{
     public AskIsAMine(Blackboard blackboard) : base(blackboard){}
 
-    protected override void Awake()
-    {
+    protected override void Awake(){
         status = State.Executing;
     }
 
-    protected override bool ExecuteCondition()
-    {
-        if (blackboard.GetTarget() != null && blackboard.GetTarget().tag == "Mine")
-			return true;
+    protected override bool ExecuteCondition(){
+        if (blackboard.GetTarget() != null && blackboard.GetTarget().tag == "Mina"){
+            Debug.Log("Asking if is Mine - True");
+            return true;
+        }
 
-		return false;
+        Debug.Log("Asking if is Mine - False");
+        return false;
     }
 
-    protected override void Reset()
-    {
+    protected override void Reset(){
         status = State.Sleep;
     }
 }
