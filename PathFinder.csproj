@@ -106,7 +106,10 @@
     <Compile Include="Assets\Scripts\PlayerBehavior Tree\AskIsAMine.cs" />
     <Compile Include="Assets\Scripts\PlayerBehavior Tree\AskMineIsEmpty.cs" />
     <Compile Include="Assets\Scripts\PlayerBehavior Tree\Blackboard.cs" />
+    <Compile Include="Assets\Scripts\PlayerBehavior Tree\DepositeOnHome.cs" />
+    <Compile Include="Assets\Scripts\PlayerBehavior Tree\GoDeposite.cs" />
     <Compile Include="Assets\Scripts\PlayerBehavior Tree\GoTo.cs" />
+    <Compile Include="Assets\Scripts\PlayerBehavior Tree\MineMaterials.cs" />
     <Compile Include="Assets\Scripts\PlayerBehavior Tree\PlayerAIBuilder.cs" />
     <Compile Include="Assets\Scripts\PlayerController.cs" />
     <Compile Include="Assets\Scripts\States\Deposite.cs" />

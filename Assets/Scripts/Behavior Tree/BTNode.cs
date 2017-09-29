@@ -13,9 +13,13 @@ abstract public class BTNode<T>{
 	protected State lastStatus;
 	protected T blackboard;
 
-	public BTNode(T blackboard){
+	public BTNode(T blackboard) {
 		this.blackboard = blackboard;
 	}
+
+    virtual protected bool Validate() {
+        return true;
+    }
 
 	abstract protected void Awake();
 
@@ -23,17 +27,19 @@ abstract public class BTNode<T>{
 
 	abstract protected void Reset();
 
-	public State Play(){
-		if (status == State.Sleep)
-		{
+	public State Play() {
+		if (status == State.Sleep) {
 			Awake();
-			lastStatus = status = State.Executing;
+            if (!Validate()) {
+                Reset();
+                return State.False;
+            }
+            lastStatus = status = State.Executing;
 		}
 
 		lastStatus = status = Execute();
 		
-		if (status != State.Executing)
-		{
+		if (status != State.Executing) {
 			Reset();
 			status = State.Sleep;
 		}

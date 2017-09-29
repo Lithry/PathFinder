@@ -7,7 +7,7 @@ public abstract class Action<T> : BTNode<T> {
 
 	protected abstract State ExecuteAction();
 	
-	override protected State Execute(){
+	override protected State Execute() {
 		return ExecuteAction();
 	}
 }

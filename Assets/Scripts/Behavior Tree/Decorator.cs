@@ -4,9 +4,9 @@ using System.Collections.Generic;
 public class Decorator<T> : NodeWithChildrens<T> {
 	public Decorator(T blackboard) : base(blackboard) {}
 	
-	override protected State Execute(){
+	override protected State Execute() {
 		status = childs[0].Play();
-		switch(status){
+		switch(status) {
 			case State.True:
 				return State.False;
 			case State.False:

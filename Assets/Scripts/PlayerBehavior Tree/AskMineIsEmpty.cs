@@ -3,9 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class AskMineIsEmpty : Conditional<Blackboard> {
-    public AskMineIsEmpty(Blackboard blackboard) : base(blackboard)
-    {
-    }
+
+    public AskMineIsEmpty(Blackboard blackboard) : base(blackboard) {}
 
     protected override void Awake() {
         status = State.Executing;

@@ -5,13 +5,13 @@ public class Selector<T> : NodeWithChildrens<T> {
 	private int childIndex;
 	public Selector(T blackboard) : base(blackboard) {}
 
-	override protected void Awake(){}
+	override protected void Awake() {}
 
 	override protected State Execute() {
-			while(childIndex < childs.Count){
+			while(childIndex < childs.Count) {
 			status = childs[childIndex].Play();
 
-			switch(status){
+			switch(status) {
 				case State.Executing:
 				return status;
 				case State.False:

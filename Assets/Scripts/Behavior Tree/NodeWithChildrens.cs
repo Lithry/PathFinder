@@ -5,7 +5,7 @@ public class NodeWithChildrens<T> : BTNode<T> {
 	protected List<BTNode<T>> childs = new List<BTNode<T>>();
 	public NodeWithChildrens(T blackboard) : base(blackboard) {}
 	
-	override protected void Awake(){}
+	override protected void Awake() {}
 
 	override protected State Execute() {
 		return State.True;

@@ -5,46 +5,55 @@ using UnityEngine;
 public class Blackboard {
 	private Vector3 targetPosition;
     private GameObject target;
+    private GameObject home;
     private PlayerController player;
     private float speed;
 
-    public Vector3 GetTargetPosition(){
+    public Vector3 GetTargetPosition() {
          return targetPosition; 
     }
     
-    public void SetTargetPosition(Vector3 value){
+    public void SetTargetPosition(Vector3 value) {
         targetPosition = value;
     }
 
-    public void ResetTargetPosition(){
+    public void ResetTargetPosition() {
         targetPosition = Vector3.zero;
     }
 
-    public GameObject GetTarget(){
+    public GameObject GetTarget() {
          return target; 
     }
 
-    public void SetTarget(GameObject value){
+    public void SetTarget(GameObject value) {
         target = value;
     }
 
-    public void ResetTarget(){
+    public void ResetTarget() {
         target = null;
     }
 
-    public PlayerController GetPlayer(){
+    public GameObject GetHome() {
+        return home;
+    }
+
+    public void SetHome(GameObject value) {
+        home = value;
+    }
+
+    public PlayerController GetPlayer() {
         return player;
     }
 
-    public void SetPlayer(PlayerController value){
+    public void SetPlayer(PlayerController value) {
         player = value;
     }
 
-    public float GetSpeed(){
+    public float GetSpeed() {
         return speed;
     }
     
-    public void SetSpeed(float value){
+    public void SetSpeed(float value) {
         speed = value;
     }
 }

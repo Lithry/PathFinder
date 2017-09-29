@@ -5,11 +5,11 @@ public abstract class Logic<T> : NodeWithChildrens<T> {
 
 	public Logic(T blackboard) : base(blackboard) {}
 
-	override protected void Awake(){}
+	override protected void Awake() {}
 	
 	abstract protected bool ExecuteLogic();
 	
-	override protected State Execute(){
+	override protected State Execute() {
 		if (ExecuteLogic())
 			return State.True;
 		

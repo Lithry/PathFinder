@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour {
-	public float speed;
+    public GameObject home;
+    public float speed;
 	private int bag = 0;
 	public bool search;
 
@@ -36,6 +37,7 @@ public class PlayerController : MonoBehaviour {
 
 	void Awake () {
 		blackboard.SetPlayer(this);
+        blackboard.SetHome(home);
         blackboard.SetSpeed(speed);
 		AI = AIBuilder.BuildAI(blackboard);
 	}
@@ -43,6 +45,7 @@ public class PlayerController : MonoBehaviour {
 	void Update () {
 		Move();
 		AI.Play();
+        Debug.Log(bag);
 	}
 
 	void Move(){
@@ -82,4 +85,8 @@ public class PlayerController : MonoBehaviour {
 	public int getBagNum(){
 		return bag;
 	}
+
+    public void ResetBag(){
+        bag = 0;
+    }
 }

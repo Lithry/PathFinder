@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GoTo : Action<Blackboard> {
-	private Stack<Node> path = new Stack<Node>();
+public class GoDeposite : Action<Blackboard>{
+    private Stack<Node> path = new Stack<Node>();
     private Vector3 lastTargetPosition;
 
-    public GoTo(Blackboard blackboard) : base(blackboard) {}
+    public GoDeposite(Blackboard blackboard) : base(blackboard) {}
 
     protected override bool Validate() {
         if (lastTargetPosition != blackboard.GetTargetPosition())
@@ -16,11 +16,14 @@ public class GoTo : Action<Blackboard> {
     }
 
     protected override void Awake() {
-        if (blackboard.GetTargetPosition() != Vector3.zero)
-            path = PathFinder.instance.FindPhat(blackboard.GetPlayer().transform.position, blackboard.GetTargetPosition());
+        if (blackboard.GetHome() != null) {
+            Vector3 pos = new Vector3();
+            pos.Set(blackboard.GetHome().transform.position.x, 0, blackboard.GetHome().transform.position.z);
+            path = PathFinder.instance.FindPhat(blackboard.GetPlayer().transform.position, pos);
+        }
 
         lastTargetPosition = blackboard.GetTargetPosition();
-		status = State.Executing;
+        status = State.Executing;
     }
 
     protected override State ExecuteAction() {
@@ -30,7 +33,7 @@ public class GoTo : Action<Blackboard> {
 
             if (Vector3.Distance(path.Peek().GetPosition(), blackboard.GetPlayer().transform.position) < 0.10f) {
                 if (path.Count <= 1 && Vector3.Distance(path.Peek().GetPosition(), blackboard.GetPlayer().transform.position) < 0.10f) {
-                    Debug.Log("Goin To - True");
+                    Debug.Log("Go Deposite - True");
                     return State.True;
                 }
                 else
@@ -40,15 +43,15 @@ public class GoTo : Action<Blackboard> {
         else {
             blackboard.ResetTargetPosition();
             blackboard.ResetTarget();
-            Debug.Log("Goin To - False");
+            Debug.Log("Go Deposite - False");
             return State.False;
         }
-        Debug.Log("Goin To - Executing");
+        Debug.Log("Go Deposite - Executing");
         return State.Executing;
     }
 
     protected override void Reset() {
         path = null;
-		status = State.Sleep;
+        status = State.Sleep;
     }
 }
