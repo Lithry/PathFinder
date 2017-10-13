@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PathFinder : MonoBehaviour {
 	static public PathFinder instance;
-	[Range(1, 10)]
+	[Range(1, 30)]
 	public int size;
     private List<Node> nodes = new List<Node>();
     private List<Node> openNodes = new List<Node>();

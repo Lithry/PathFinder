@@ -7,10 +7,9 @@ public class PlayerController : MonoBehaviour {
     public float speed;
 	private int bag = 0;
 	public bool search;
+	private Boid boid = new Boid();
 
-	private PlayerAIBuilder AIBuilder = new PlayerAIBuilder();
-	private Blackboard blackboard = new Blackboard();
-	private BTNode<Blackboard> AI;
+	
 
 	public enum States{
 		Idle = 0,
@@ -32,20 +31,17 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	private State[] states;
-	private Stack<Node> path = new Stack<Node>();
+//	private Stack<Node> path = new Stack<Node>();
 
 
 	void Awake () {
-		blackboard.SetPlayer(this);
-        blackboard.SetHome(home);
-        blackboard.SetSpeed(speed);
-		AI = AIBuilder.BuildAI(blackboard);
+		boid.SetParentTransform(transform);
+		boid.SetSpeed(speed);
 	}
 
 	void Update () {
 		Move();
-		AI.Play();
-        Debug.Log(bag);
+		boid.Move();
 	}
 
 	void Move(){
@@ -53,8 +49,7 @@ public class PlayerController : MonoBehaviour {
    		RaycastHit hit; 
    		Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition); 
    			if ( Physics.Raycast (ray,out hit)) {
-				blackboard.SetTargetPosition(new Vector3(hit.point.x, 0, hit.point.z));
-				blackboard.SetTarget(hit.transform.gameObject);
+				boid.PassDirection(new Vector2(hit.point.x, hit.point.z));
 			}
 		}
 	}
