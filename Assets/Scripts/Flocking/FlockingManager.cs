@@ -8,9 +8,14 @@ public class FlockingManager : MonoBehaviour {
 	private Boid boidA;
 	private Boid boidB;
 	public float boidsViewRange;
+	public GameObject players;
+	public int numOfPlayers;
 
-	void Start () {
+	void Awake () {
 		instance = this;
+		for (int i = 0; i < numOfPlayers; i++){
+			Instantiate(players, new Vector3(Random.Range(-20, 21), 0, Random.Range(-20, 21)), Quaternion.Euler(new Vector3(0, Random.Range(0, 361), 0)));
+		}
 	}
 
 	void Update () {

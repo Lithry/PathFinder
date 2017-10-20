@@ -34,9 +34,10 @@ public class PlayerController : MonoBehaviour {
 //	private Stack<Node> path = new Stack<Node>();
 
 
-	void Awake () {
+	void Start () {
 		boid.SetParentTransform(transform);
 		boid.SetSpeed(speed);
+		boid.Start();
 	}
 
 	void Update () {
