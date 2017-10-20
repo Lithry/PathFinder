@@ -67,7 +67,20 @@ public class Boid {
 		cohesion.Normalize();
 		Vector3 separation = cohesion * -1;
 
-		v3Direction += CalculateAlignment() + cohesion * mag + separation * (1.0f - mag);
+		Vector3 dist = Vector3.zero;
+		for (int i = 0; i < neighbors.Count; i++){
+			if (Vector3.Distance(trans.position, neighbors[i].GetPosition()) < FlockingData.BoidDistanceToDodge){
+				Vector3 currentDir = (neighbors[i].GetPosition() - trans.position);
+	
+				float distMag = currentDir.magnitude;
+				float distFactor = (1 - (Mathf.Clamp01(distMag / FlockingData.BoidDistanceToDodge)));
+				currentDir.Normalize();
+
+				dist += (currentDir * -1) * distFactor;
+			}
+		}
+
+		v3Direction += CalculateAlignment() + cohesion * mag + separation * (1.0f - mag) + dist;
 
 		//v3Direction.Normalize();
 	}

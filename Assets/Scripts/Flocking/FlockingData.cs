@@ -4,5 +4,6 @@ using UnityEngine;
 
 public class FlockingData {
 	static public float BoidMinDistance = 7;
+	static public float BoidDistanceToDodge = 6;
 	static public float BoidRangeOfView = 5;
 }
